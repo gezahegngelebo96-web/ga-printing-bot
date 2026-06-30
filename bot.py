@@ -4,6 +4,9 @@ from telegram.ext import Application, CommandHandler, ContextTypes
 
 TOKEN = os.getenv("TOKEN")
 
+print("TOKEN EXISTS:", TOKEN is not None)
+print("TOKEN LENGTH:", len(TOKEN) if TOKEN else 0)
+
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("✅ GA Printing Bot is working!")
 
