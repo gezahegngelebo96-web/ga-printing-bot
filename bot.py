@@ -5,7 +5,7 @@ from telegram.ext import Application, CommandHandler, MessageHandler, ContextTyp
 TOKEN = os.getenv("TOKEN")
 
 if not TOKEN:
-    print("❌ TOKEN NOT FOUND - Check Railway Variables")
+    raise Exception("TOKEN NOT FOUND IN RAILWAY VARIABLES")
 
 menu = [
     ["📸 Photo Editing", "🪪 ID Photo"],
@@ -17,7 +17,7 @@ keyboard = ReplyKeyboardMarkup(menu, resize_keyboard=True)
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "Welcome to GA Printing & Studio 🇪🇹\nChoose service:",
+        "Welcome to GA Printing & Studio 🇪🇹",
         reply_markup=keyboard
     )
 
@@ -42,11 +42,11 @@ async def handle(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("Please choose from menu.")
 
 def main():
-    print("🚀 BOT STARTING...")
+    print("BOT STARTING...")
 
     app = Application.builder().token(TOKEN).build()
 
-    print("✅ APP BUILT SUCCESSFULLY")
+    print("BOT RUNNING...")
 
     app.add_handler(CommandHandler("start", start))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle))
